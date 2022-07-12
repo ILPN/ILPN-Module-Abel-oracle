@@ -3,7 +3,7 @@
     <hr>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly start">
-
+        <ilpn-file-upload descriptionText="XES log file" [fileDisplay]="FD_LOG" (fileContent)="processFileUpload($event)"></ilpn-file-upload>
     </div>
 
 </ilpn-page-layout>

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {APP_BASE_HREF} from '@angular/common';
+import {DropFile, FD_LOG, XesLogParserService} from 'ilpn-components';
 
 @Component({
     selector: 'app-root',
@@ -11,4 +12,13 @@ import {APP_BASE_HREF} from '@angular/common';
     ]
 })
 export class AppComponent {
+
+    public FD_LOG = FD_LOG;
+
+    constructor(private _xesParser: XesLogParserService) {
+    }
+
+    processFileUpload(files: Array<DropFile>) {
+        console.log(this._xesParser.parse(files[0].content));
+    }
 }
