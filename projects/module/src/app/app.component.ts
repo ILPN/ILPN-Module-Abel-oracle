@@ -1,6 +1,14 @@
 import {Component} from '@angular/core';
 import {APP_BASE_HREF} from '@angular/common';
-import {AbelOracleService, DropFile, FD_LOG, XesLogParserService} from 'ilpn-components';
+import {
+    AbelOracleService,
+    DropFile,
+    FD_LOG,
+    FD_PETRI_NET,
+    IncrementingCounter,
+    PetriNetSerialisationService,
+    XesLogParserService
+} from 'ilpn-components';
 
 @Component({
     selector: 'app-root',
@@ -16,14 +24,23 @@ export class AppComponent {
     // TODO update module template with new dependency
 
     public FD_LOG = FD_LOG;
+    public FD_PN = FD_PETRI_NET;
 
-    constructor(private _xesParser: XesLogParserService, private _αbelOracle: AbelOracleService) {
+    public result: Array<DropFile> | undefined = undefined;
+
+    constructor(private _xesParser: XesLogParserService,
+                private _αbelOracle: AbelOracleService,
+                private _PetriNetSerializer: PetriNetSerialisationService) {
     }
 
     processFileUpload(files: Array<DropFile>) {
+        this.result = undefined;
         const log = this._xesParser.parse(files[0].content);
         this._αbelOracle.determineConcurrency(log).subscribe(partialOrderNets => {
-            console.log(partialOrderNets)
+            const counter = new IncrementingCounter();
+            this.result = partialOrderNets.map(pn => {
+                return new DropFile(`po${counter.next()}`, this._PetriNetSerializer.serialise(pn));
+            });
         })
     }
 }
