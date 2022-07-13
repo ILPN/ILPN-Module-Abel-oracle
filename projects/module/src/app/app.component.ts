@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {APP_BASE_HREF} from '@angular/common';
-import {AbelOracle, DropFile, FD_LOG, XesLogParserService} from 'ilpn-components';
+import {AbelOracleService, DropFile, FD_LOG, XesLogParserService} from 'ilpn-components';
 
 @Component({
     selector: 'app-root',
@@ -17,11 +17,13 @@ export class AppComponent {
 
     public FD_LOG = FD_LOG;
 
-    constructor(private _xesParser: XesLogParserService) {
+    constructor(private _xesParser: XesLogParserService, private _αbelOracle: AbelOracleService) {
     }
 
     processFileUpload(files: Array<DropFile>) {
         const log = this._xesParser.parse(files[0].content);
-        const partialOrders = (new AbelOracle()).determineConcurrency(log);
+        this._αbelOracle.determineConcurrency(log).subscribe(partialOrderNets => {
+            console.log(partialOrderNets)
+        })
     }
 }
