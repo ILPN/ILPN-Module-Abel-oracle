@@ -21,8 +21,6 @@ import {
 })
 export class AppComponent {
 
-    // TODO update module template with new dependency
-
     public FD_LOG = FD_LOG;
     public FD_PN = FD_PETRI_NET;
 
