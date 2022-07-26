@@ -4,7 +4,7 @@
 
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly start">
         <ilpn-file-upload descriptionText="drop a XES log file here" [showText]="result === undefined" [fileDisplay]="FD_LOG" (fileContent)="processFileUpload($event)"></ilpn-file-upload>
-        <ilpn-file-download descriptionText="download partial order Petri nets" [disabled]="result === undefined" [fileDisplay]="FD_PN" [files]="result" zipFileName="partialOrders" [dontZip]="true"></ilpn-file-download>
+        <ilpn-file-download descriptionText="download partial order Petri nets" [disabled]="result === undefined" [fileDisplay]="FD_PN" [files]="result" zipFileName="partialOrders"></ilpn-file-download>
     </div>
 
 </ilpn-page-layout>

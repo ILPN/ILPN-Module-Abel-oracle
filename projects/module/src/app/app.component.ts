@@ -36,8 +36,8 @@ export class AppComponent {
         const log = this._xesParser.parse(files[0].content);
         this._αbelOracle.determineConcurrency(log).subscribe(partialOrderNets => {
             const counter = new IncrementingCounter();
-            this.result = partialOrderNets.map(pn => {
-                return new DropFile(`po${counter.next()}`, this._PetriNetSerializer.serialise(pn));
+            this.result = partialOrderNets.sort((a, b) => b.frequency! - a.frequency!).map(pn => {
+                return new DropFile(`po${counter.next()}.pn`, this._PetriNetSerializer.serialise(pn));
             });
         })
     }
