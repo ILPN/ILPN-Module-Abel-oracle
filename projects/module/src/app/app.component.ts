@@ -15,8 +15,7 @@ import {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     providers: [
-        // TODO base href
-        {provide: APP_BASE_HREF, useValue: '/ilovepetrinets/'}
+        {provide: APP_BASE_HREF, useValue: '/ilovepetrinets/kangaroo/'}
     ]
 })
 export class AppComponent {
